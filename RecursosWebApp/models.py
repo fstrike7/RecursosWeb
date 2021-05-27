@@ -23,7 +23,7 @@ class Post(models.Model):
     title = models.CharField(verbose_name='Título',max_length=255)
     author = models.ForeignKey(verbose_name='Autor',to=User, on_delete = models.CASCADE)
     body = RichTextField(blank=True, null=True)
-    categorias = models.ManyToManyField(verbose_name='Categoría',to=Categoria)
+    categorias = models.ManyToManyField(verbose_name='Categoria',to=Categoria)
     image=models.ImageField(verbose_name='Imagen',upload_to='posts', default="/posts/200.gif")
     likes = models.ManyToManyField(User, related_name='blog_post')
     
