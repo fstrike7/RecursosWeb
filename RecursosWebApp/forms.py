@@ -9,11 +9,11 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'author', 'categorias', 'image', 'body')
 
-        choices = Categoria.objects.all().values_list('title', 'title')
+        #choices = Categoria.objects.all().values_list('title', 'title')
         widgets = {
             'title' : forms.TextInput(attrs={'class':'formulario-control titulo'} ),
             'author' : forms.TextInput(attrs={'class':'formulario-control autor', 'value':'', 'id':'username', 'type':'hidden'}),
-            'categorias' : forms.SelectMultiple(choices=choices, attrs=({'class':'selector'})),
+            #'categorias' : forms.SelectMultiple(choices=choices, attrs=({'class':'selector'})),
             'image' : forms.ImageField().widget.attrs.update({'class':'selector'}),
             'body' : forms.Textarea(attrs={'class':'formulario-control cuerpo'} )
         }
