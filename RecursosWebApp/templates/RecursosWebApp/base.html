@@ -1,0 +1,106 @@
+
+{% load static %}
+
+<html>
+    <head>
+        <link rel="shortcut icon" href="{% static 'RecursosWebApp/img/terminal.svg' %}">
+        <title>
+
+            {% block title %} {% endblock %}  
+
+        </title>
+
+        <!-- Fonts -->
+            
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+            
+       
+       <!-- Styles -->
+       <link href="{% static 'RecursosWebApp/css/normalize.css' %}" rel="stylesheet">
+       <link href="{% static 'RecursosWebApp/css/general.css' %}" rel="stylesheet">
+       <script src="{% static 'RecursosWebApp/js/funcionalidad.js' %}"></script>
+    </head>
+
+    <body>
+        <div class="title">
+            <h1 class="titulo-pag">
+                <span>Recursos</span>
+            </h1>
+        </div>
+
+        {% include "RecursosWebApp/superior/navbar.html" %}
+
+        <!--Contenido cambiante-->
+        {% block content %}
+
+        {% endblock %}
+
+        <div id="perfil_autor">
+            <div id="boton-volver-relative">
+                <a href="javascript:void(0);" onclick="showPerfil('perfil_autor');"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+            </div>
+
+                {% with usuario=post.author %}
+
+                    <div id="contenido-perfil">
+                        <img src="{{usuario.perfil.profile_pic.url}}" style="width: 50px; height: auto; border-radius: 50%;">
+                        <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
+                        <strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong>
+                        <p><i>{{usuario.perfil.bio}}</i></p>
+                        <div class="row" id="redes">
+                            {% if usuario.email %}
+                                <a href="mail_to:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                            {% endif %}
+                            {% if usuario.perfil.webpage %}
+                                <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
+                            {% endif %}
+                            {% if usuario.perfil.numero %}
+                                <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
+                            {% endif %}
+                        </div>
+                        <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
+                            <a href="{% url 'editar' %}" style="appearance: button; text-align: right;">Editar perfil</a>
+                        </div>
+                    </div>
+                {% endwith %}
+        </div>
+        {% if user.is_authenticated %}
+            <div id="perfil">
+                <div id="boton-volver-relative">
+                    <a href="javascript:void(0);" onclick="showPerfil('perfil');"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+                </div>
+
+                    {% with usuario=user %}
+                        <div id="contenido-perfil">
+                            <img src="{{usuario.perfil.profile_pic.url}}" style="width: 50px; height: auto; border-radius: 50%;">
+                            <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
+                            <strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong>
+                            <p><i>{{usuario.perfil.bio}}</i></p>
+                            <div class="row" id="redes">
+                                {% if usuario.email %}
+                                <a href="mail_to:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                                {% endif %}
+                                {% if usuario.perfil.webpage %}
+                                <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
+                                {% endif %}
+                                {% if usuario.perfil.numero %}
+                                <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
+                                {% endif %}
+                            </div>
+                            <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
+                                <a href="{% url 'editar_info' usuario.perfil.pk %}" style="appearance: button; text-align: right;">Editar perfil</a>
+                            </div>
+                        </div>
+                    {% endwith %}
+            </div>
+        {% endif %}
+        
+        <!-- Footer -->
+        <footer class="pie-pagina">
+            <p class="texto-pie-pagina"> Faustino Beatrice - 2021</p><a href="https://github.com/fstrike7"><img src="{% static 'RecursosWebApp/img/github.svg' %}" style="width: 3vh; height: 3vh; margin-left: 3vh; margin-right: 3vh;"></a><a href="https://www.linkedin.com/in/faustino-beatrice/"><img src="{% static 'RecursosWebApp/img/linkedin.png' %}" style="width: 3vh; height: 3vh;"></a>
+        </footer>
+
+    </body>
+</html>

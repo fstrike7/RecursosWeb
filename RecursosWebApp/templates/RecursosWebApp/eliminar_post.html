@@ -1,0 +1,35 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Eliminar post
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    {% if user.is_authenticated and user.id == post.author.id %}
+    <h3 class="subtitulo">Eliminar post</h3>
+    
+    <div class="formulario" id="contenedor-acerca">
+        <table>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        </table>
+        <h3 style="text-align: center;">Estás por eliminar: <strong>{{post.title}}</strong></h4>
+        <strong style="text-align: center;">¿Estás seguro?</strong>
+        <br>
+        <button id="boton-publicar">Eliminar</button>
+        
+        </form>
+    </div>
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión como el autor del post para ver esta página</strong></h4>
+    {% endif %}
+</body>
+{% endblock %}

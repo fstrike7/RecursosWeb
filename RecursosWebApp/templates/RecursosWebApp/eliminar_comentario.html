@@ -1,0 +1,43 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Eliminar comentario
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    {% if user.is_authenticated and user == comentario.user %}
+    <h3 class="subtitulo">Eliminar comentario</h3>
+    
+    <div class="formulario" id="contenedor-acerca">
+        <table>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        </table>
+        <h3 style="text-align: center;">Estás por eliminar el siguiente comentario:</h4>
+        <p class="comentario">
+            <span style="align-self: baseline;"><img src="{{comentario.user.perfil.profile_pic.url}}" style="width: 25px; height: auto; border-radius: 50%;">
+            <span style="text-shadow: 0 2 2 0.2;"><b>{{comentario.user.first_name}} {{comentario.user.last_name}}</b></span>  <small>{{comentario.date_added}}</small></span>
+            {% if comentario.user == user %}
+                <a href="#" style="right: 500;"><img src="{% static 'RecursosWebApp/img/alternate-trash.svg'%}"> <span class="hide-texto">Eliminar</span></a>
+            {% endif %}
+            <br><br> <span>{{comentario.body}}</span>
+        </p>
+        <strong style="text-align: center;">¿Estás seguro?</strong>
+        <br>
+        <button id="boton-publicar">Eliminar</button>
+        
+        </form>
+    </div>
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión como el autor del comentario para ver esta página</strong></h4>
+    {% endif %}
+</body>
+{% endblock %}

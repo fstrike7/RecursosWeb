@@ -1,0 +1,45 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Cambiar contraseña
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    <h3 class="subtitulo">Cambiar contraseña</h3>
+
+    {% if user.is_authenticated %}
+    
+        <div class="formulario" id="contenedor-acerca">
+            <table>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_table }}
+            </table>
+
+            <span class=helptext>
+                <ul>
+                    <li>Your password can’t be too similar to your other personal information.</li>
+                    <li>Your password must contain at least 8 characters.</li>
+                    <li>Your password can’t be a commonly used password.</li>
+                    <li>Your password can’t be entirely numeric.</li>
+                </ul>
+            </span>
+            
+            <button id="boton-publicar">Actualizar contraseña</button>
+            
+            </form>
+        </div>  
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión como el autor del post para ver esta página</strong></h4>
+    {% endif %}
+</body>
+{% endblock %}
+

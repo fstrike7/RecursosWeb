@@ -1,0 +1,36 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Inicio
+{% endblock %}
+  
+{% block content %}
+<body>
+
+    <h3 class="subtitulo">Categorias</h3>
+    
+    <div class="contenedor-padre">
+        <div class="contenedor-elementos">
+            {% for categoria in object_list %}
+                    <a href="{% url 'filtro-categoria' categoria.pk %}">
+                        <div class="carta" id="categoria">
+                            <img id="img-carta" src="{{categoria.image.url}}" alt="Categoria">
+                            <div class="contenedor-carta">
+                                <h4><b>{{categoria.title}}</b></h4>
+                            </div>
+                        </div>
+                    </a>    
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <section>
+        <a href="{% url 'Agregar-Post' %}"><img id="boton-crear" src="{% static 'RecursosWebApp/img/plus.svg'%}"></a>
+    </section>
+
+</body>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Editar post
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    {% if user.is_authenticated and user.id == post.author.id %}
+    <h3 class="subtitulo">Editar post</h3>
+    
+    <div class="formulario" id="contenedor-acerca">
+        <table>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_table }}
+        </table>
+        
+        <button id="boton-publicar">Publicar</button>
+        
+        </form>
+    </div>
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión como el autor del post para poder ver esta página</strong></h4>
+    {% endif %}
+</body>
+{% endblock %}

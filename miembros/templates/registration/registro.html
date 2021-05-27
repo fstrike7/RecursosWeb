@@ -1,0 +1,31 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Registrarse
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    <h3 class="subtitulo">Registro</h3>
+    
+    <div class="formulario" id="contenedor-acerca">
+        <table>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_table }}
+        </table>
+        
+        <button id="boton-publicar">Registrarse</button>
+        
+        </form>
+    </div>
+</body>
+{% endblock %}
+

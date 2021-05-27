@@ -1,0 +1,47 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Editar perfil
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    <h3 class="subtitulo">Editar privacidad</h3>
+    
+    {% if user.is_authenticated %}
+        <section id="editar">
+            <div class="nav-edit" id="contenedor-editar">
+                <ul>
+                    <hr>
+                    <li><a href="{% url 'editar_info' user.perfil.pk %}">Información</a></li>
+                    <hr>
+                    <li id="highlighted"><a href="{% url 'editar' %}">Privacidad</a></li>
+                    <hr>
+                </ul>
+            </div>
+            <div class="formulario" id="contenedor-acerca">
+                <table>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                </table>
+                
+                <button id="boton-publicar">Actualizar</button>
+                
+                </form>
+            </div>
+        </section>
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión como el autor para ver esta página</strong></h4>
+    {% endif %}
+    
+</body>
+{% endblock %}
+

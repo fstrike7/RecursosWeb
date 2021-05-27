@@ -1,0 +1,40 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Crear post
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    {% if user.is_authenticated %}
+    <h3 class="subtitulo">Crear post</h3>
+    
+    <div class="formulario" id="contenedor-acerca">
+        <table>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_table }}
+        </table>
+        
+        <button id="boton-publicar">Publicar</button>
+        
+        </form>
+    </div>
+    <script>
+        var name = "{{user.id}}";
+        document.getElementById('username').value = name;
+    </script>
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión para poder ver esta página</strong></h4>
+    {% endif %}
+</body>
+{% endblock %}
+

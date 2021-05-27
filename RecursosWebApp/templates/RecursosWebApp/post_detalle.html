@@ -1,0 +1,102 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Posts
+{% endblock %}
+  
+{% block content %}
+<body>
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+    
+    <div class="contenedor-padre">
+        <div class="contenedor-hijo">
+            <div class="carta">
+                {% if post.image %}
+                    <a href="{{post.image.url}}"><img id="img-carta" src="{{post.image.url}}" alt="Post" style="object-fit:cover;"></a>
+                {% endif %}
+                <div class="contenedor-carta">
+                    <h4 id="titulo-post">{{post.title}}</h4>
+                    {% if user.is_authenticated and user.id == post.author.id %}
+                    <div class="botones-post">
+                        <p id="boton-editar">
+                            <a target="_blank" href="{% url 'Editar-Post' post.pk %}"><img src="{% static 'RecursosWebApp/img/edit.svg'%}"> <span class="hide-texto">Editar</span></a>
+                        </p>
+                        <p id="boton-eliminar">
+                            <a href="{% url 'Eliminar-Post' post.pk %}"><img src="{% static 'RecursosWebApp/img/alternate-trash.svg'%}"> <span class="hide-texto">Eliminar</span></a>
+                        </p>
+                    </div>
+                    {% endif %}
+                    <p id="autor">{{post.author.first_name}} {{post.author.last_name}} <br> 
+                    <a href="javascript:void(0);" onclick="showPerfil('perfil_autor');"><small><span style="opacity: 0.7;">@{{post.author}}</span></small></a></p>
+                    <br><p>Publicado: {{post.created}}</p>
+                </div>
+               
+                <form action="{% url 'like_post' post.pk %}" method="POST">
+                    {% csrf_token %}
+                    <p id="boton-megusta">
+                        {% if user.is_authenticated %}
+                            <input type="image", name="post_id", value="{{post.id}}", src="{% static 'RecursosWebApp/img/like.svg'%}">
+                        {% else %}
+                            <img onclick="alert('Inicia sesión para dar Me Gusta a un post')" src="{% static 'RecursosWebApp/img/like.svg'%}">
+                        {% endif %}
+                        <span id="conteo-likes" style="color: black; margin-left: 15%;">{{post.likes.count}}</span></button>
+                    </p>
+                </form>
+                <script>
+                    var user = "{{user}}";
+                    var users_list = "{{post.likes.all}}";
+                    var x = document.getElementById("boton-megusta");
+                    var y = document.getElementById("conteo-likes");
+                    if (users_list.includes(user)){
+                        x.style.opacity = 1;
+                        y.style.color = "lime";
+                    }else{
+                        x.style.opacity = 0.3;
+                    }
+                </script>
+            </div>
+            
+            
+        
+        
+            <div class="contenido-post">
+                <div class="contenedor-cuerpo-post">
+                    <p class="contenido-post-cuerpo">{{post.body|safe}}</p>
+                </div>
+
+                {% if post.comentarios.all %}
+                    <p class="comentario-title" style="align-self: center; padding-left: 100; padding-right: 100;">Comentarios</p>
+                    
+        
+                    {% for comentario in post.comentarios.all %}
+                        <p class="comentario">
+                            <span style="align-self: baseline;"><img src="{{comentario.user.perfil.profile_pic.url}}" style="width: 25px; height: auto; border-radius: 50%;">
+                            <span style="text-shadow: 0 2 2 0.2;"><b>{{comentario.user.first_name}} {{comentario.user.last_name}}</b></span>  <small>{{comentario.date_added}}</small></span>
+                            {% if comentario.user == user %}
+                                <a href="{% url 'Eliminar-Comentario' comentario.pk %}" style="right: 500;"><img src="{% static 'RecursosWebApp/img/alternate-trash.svg'%}"> <span class="hide-texto">Eliminar</span></a>
+                            {% endif %}
+                            <br><br> <span>{{comentario.body}}</span>
+                        </p>
+                    {% endfor %}
+                    
+                {% else %}
+                    <p class="comentario-title" style="align-self: center;">No hay comentarios todavía</p>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <div class="botones-post">
+                        <p id="boton-editar">
+                            <a href="{% url 'Agregar-Comentario' post.pk %}"><img src="{% static 'RecursosWebApp/img/speech-bubble.svg'%}"> <span class="hide-texto">Comentar</span></a>
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+            
+    
+        </div>
+    </div>
+</body>
+{% endblock %}

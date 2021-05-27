@@ -1,0 +1,23 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Contraseña cambiada
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    <h3 class="subtitulo">Contraseña actualizada</h3>
+    
+    <div class="formulario" id="contenedor-acerca">
+        <h4 class="subtitulo">Su contraseña fue actualizada correctamente.</h4>
+    </div>
+</body>
+{% endblock %}
+

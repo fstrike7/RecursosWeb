@@ -1,0 +1,45 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Crear post
+{% endblock %}
+  
+{% block content %}
+<body>
+    
+    <div id="boton-volver">
+        <a href="{% url 'Inicio' %}"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+    </div>
+
+    <h3 class="subtitulo">Comentar</h3>
+    {% if user.is_authenticated %}
+        
+        <div class="formulario" id="contenedor-acerca" style="
+        padding: 2vh;
+        width: fit-content;
+        margin: auto;
+        align-content: center;
+        align-items: center;
+        justify-content: center;">
+            <div style="flex: 0 1 auto;">
+                <!-- {% if user.is_authenticated %} -->
+                <img style="width: 50px; height: auto; border-radius: 50%;" class="comentario" src="{{user.perfil.profile_pic.url}}"><p>{{user.first_name}} {{user.last_name}}</p>
+                <table>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}</p>
+                        
+                        <input id="boton-comentar", type="image", name="post_id", value="{{post.id}}", src="{% static 'RecursosWebApp/img/send.svg'%}", style="width: 50px; align-self: flex-end;">
+                    </form>
+                    </table>
+                <!-- {% endif %} -->
+            </div>
+        </div>
+    {% else %}
+    <h4 id="contenedor-acerca"><strong>Necesitas iniciar sesión para poder ver esta página</strong></h4>
+    {% endif %}
+</body>
+{% endblock %}
+
