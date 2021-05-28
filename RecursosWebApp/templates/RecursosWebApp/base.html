@@ -52,7 +52,7 @@
                         {% if user.is_authenticated %}
                             <div class="row" id="redes">
                                 {% if usuario.email %}
-                                    <a href="mail_to:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                                    <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
                                 {% endif %}
                                 {% if usuario.perfil.webpage %}
                                     <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
@@ -82,7 +82,7 @@
                             <p><i>{{usuario.perfil.bio}}</i></p>
                             <div class="row" id="redes">
                                 {% if usuario.email %}
-                                <a href="mail_to:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                                <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
                                 {% endif %}
                                 {% if usuario.perfil.webpage %}
                                 <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
