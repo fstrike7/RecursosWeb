@@ -66,7 +66,7 @@ class AgregarComentarioView(CreateView):
 class EditarPostView(UpdateView):
     model = Post
     template_name = "RecursosWebApp/actualizar_post.html"
-    fields = ['title', 'categorias','body']
+    fields = ['title', 'image', 'categorias','body']
 
 class EliminarPostView(DeleteView):
     model = Post
