@@ -43,7 +43,7 @@ class Post(models.Model):
 class Perfil(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField(verbose_name="Biografía", blank=True, null=True)
-    profile_pic = models.ImageField(verbose_name='Foto de perfil',upload_to='profile_pics', default="/profile_pics/profile-default.svg")
+    profile_pic = models.ImageField(verbose_name='Foto de perfil',upload_to='profile_pics', default="/profile_pics/user_icon_rpzpcr.png")
     webpage = models.CharField(verbose_name='Sitio Web',max_length=255, null=True, blank=True)
     numero = models.CharField(verbose_name='WhatsApp',max_length=255, null=True, blank=True)
 
