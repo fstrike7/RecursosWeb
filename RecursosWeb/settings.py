@@ -145,7 +145,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'Inicio'
 LOGOUT_REDIRECT_URL = 'Inicio'
 
-TEST_RUNNER = 'django_heroku.HerokuDiscoverRunner'
-
-
 django_heroku.settings(locals())
