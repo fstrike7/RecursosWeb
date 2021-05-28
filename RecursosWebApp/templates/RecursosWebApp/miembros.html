@@ -69,10 +69,13 @@
                                 <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
                                 {% endif %}
                             </div>
+                        
+                            {% if user=usuario %}
+                                <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
+                                    <a href="{% url 'editar_info' usuario.perfil.pk %}" style="appearance: button; text-align: right;">Editar perfil</a>
+                                </div>
+                            {% endif %}
                         {% endif %}
-                        <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
-                            <a href="{% url 'editar_info' usuario.perfil.pk %}" style="appearance: button; text-align: right;">Editar perfil</a>
-                        </div>
                     </div>
             </div>
         {% endwith %}
