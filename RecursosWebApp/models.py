@@ -43,6 +43,8 @@ class Perfil(models.Model):
     webpage = models.CharField(verbose_name='Sitio Web',max_length=255, null=True, blank=True)
     numero = models.CharField(verbose_name='WhatsApp',max_length=255, null=True, blank=True)
 
+    from_signal = models.BooleanField(default=False) # Para automatizar la creación de un perfil en el momento que se crea un usuario, se hace uso de "señales"
+
     def __str__(self):
         return str(self.user)
 
