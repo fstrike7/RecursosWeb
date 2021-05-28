@@ -57,17 +57,19 @@
                         <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
                         <strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong>
                         <section id="biografia-perfil"><p><i>{{usuario.perfil.bio}}</i></p></section>
-                        <div class="row" id="redes">
-                            {% if usuario.email %}
-                            <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
-                            {% endif %}
-                            {% if usuario.perfil.webpage %}
-                            <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
-                            {% endif %}
-                            {% if usuario.perfil.numero %}
-                            <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
-                            {% endif %}
-                        </div>
+                        {% if user.is_authenticated %}
+                            <div class="row" id="redes">
+                                {% if usuario.email %}
+                                <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                                {% endif %}
+                                {% if usuario.perfil.webpage %}
+                                <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
+                                {% endif %}
+                                {% if usuario.perfil.numero %}
+                                <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
                         <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
                             <a href="{% url 'editar_info' usuario.perfil.pk %}" style="appearance: button; text-align: right;">Editar perfil</a>
                         </div>
