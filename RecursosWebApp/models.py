@@ -15,7 +15,8 @@ class Categoria(models.Model):
     class Meta:
         verbose_name='categoria'
         verbose_name_plural='categorias'
-    
+        ordering = ["created"]
+   
     def __str__(self):
         return self.title
 
@@ -35,6 +36,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detallado', args=[str(self.id)] )
+
+    class Meta:
+        ordering = ["created"]
 
 class Perfil(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)

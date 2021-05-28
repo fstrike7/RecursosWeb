@@ -14,7 +14,6 @@ from django.views.generic.edit import FormMixin, FormView
 
 class HomeView(ListView):
     model = Categoria
-    ordering = ["created"]
     template_name = 'RecursosWebApp/home.html'
 
 
@@ -31,8 +30,7 @@ class EditarInfoUsuarioView(generic.UpdateView):
 
 class CategoriaView(ListView):
     template_name = "RecursosWebApp/categoria.html"
-    ordering = ["updated"]
-
+    
     def get_queryset(self):
         return Post.objects.filter(categorias=self.kwargs['pk'])
 
