@@ -21,14 +21,14 @@
                 <div class="contenedor-carta">
                     <h4 id="titulo-post">{{post.title}}</h4>
                     {% if user.is_authenticated and user.id == post.author.id %}
-                    <div class="botones-post">
-                        <p id="boton-editar">
-                            <a target="_blank" href="{% url 'Editar-Post' post.pk %}"><img src="{% static 'RecursosWebApp/img/edit.svg'%}"> <span class="hide-texto">Editar</span></a>
-                        </p>
-                        <p id="boton-eliminar">
-                            <a href="{% url 'Eliminar-Post' post.pk %}"><img src="{% static 'RecursosWebApp/img/alternate-trash.svg'%}"> <span class="hide-texto">Eliminar</span></a>
-                        </p>
-                    </div>
+                        <div class="botones-post">
+                            <p id="boton-editar">
+                                <a target="_blank" href="{% url 'Editar-Post' post.pk %}"><img src="{% static 'RecursosWebApp/img/edit.svg'%}"> <span class="hide-texto">Editar</span></a>
+                            </p>
+                            <p id="boton-eliminar">
+                                <a href="{% url 'Eliminar-Post' post.pk %}"><img src="{% static 'RecursosWebApp/img/alternate-trash.svg'%}"> <span class="hide-texto">Eliminar</span></a>
+                            </p>
+                        </div>
                     {% endif %}
                     <p id="autor">{{post.author.first_name}} {{post.author.last_name}} <br> 
                     <a href="javascript:void(0);" onclick="showPerfil('perfil_autor');"><small><span style="opacity: 0.7;">@{{post.author}}</span></small></a></p>

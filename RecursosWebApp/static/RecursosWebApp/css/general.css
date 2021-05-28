@@ -208,6 +208,25 @@ div[id^="perfil"] {
 
     }
 
+.perfiles{
+    background-color: white;
+
+    position: fixed;
+    visibility: hidden;
+
+    width: 300px;
+    height: fit-content;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.315);
+
+    transition: 0.3s;
+
+}
+
 #boton-comentar{
     transition: 0.3s;
 }

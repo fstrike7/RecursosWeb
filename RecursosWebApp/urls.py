@@ -16,5 +16,6 @@ urlpatterns = [
     path('like/<int:pk>', MeGustaView, name="like_post"),
     path('post/<int:pk>/comentario/', AgregarComentarioView.as_view(), name="Agregar-Comentario"),
     path('post/<int:pk>/comentario/eliminar', EliminarComentarioView.as_view(), name="Eliminar-Comentario"),
+    path('lista_miembros', MiembrosView.as_view(), name="Miembros"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

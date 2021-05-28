@@ -10,6 +10,4 @@ urlpatterns = [
     path('password/', PasswordsChangeView.as_view(template_name='registration/cambiar-pass.html')),
     path('password_success/', password_success, name="cambiar-pass-success"),
     path('<int:pk>/editar_info/', EditarInfoUsuarioView.as_view(), name="editar_info"),
-
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

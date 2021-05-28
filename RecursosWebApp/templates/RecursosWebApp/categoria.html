@@ -14,7 +14,7 @@
     <div class="contenedor-padre">
         
         <div class="contenedor-elementos">
-            {% for post in object_list %}
+            {% for post in object_list reversed %}
                     <a href="{% url 'post-detallado' post.pk %}"><div class="carta">
                         {% if post.image %}
                             <img id="img-carta" src="{{post.image.url}}" alt="Post" style="filter: blur(.2rem);">

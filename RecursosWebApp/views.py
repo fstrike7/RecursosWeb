@@ -17,6 +17,7 @@ class HomeView(ListView):
     template_name = 'RecursosWebApp/home.html'
 
 
+
 class EditarInfoUsuarioView(generic.UpdateView):
     form_class = Perfil
     template_name = "RecursosWebApp/informacion.html"
@@ -88,3 +89,8 @@ def MeGustaView(request, pk):
 
 def acercade(request):
     return render(request, 'RecursosWebApp/acercade.html')  
+
+
+class MiembrosView(ListView):
+    model = Perfil
+    template_name = 'RecursosWebApp/miembros.html'

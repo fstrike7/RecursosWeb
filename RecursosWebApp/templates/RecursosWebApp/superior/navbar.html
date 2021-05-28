@@ -1,6 +1,7 @@
 <div class="menu">
     <ul class="lista">
         <a href="{% url 'Inicio' %}"><li class="elemento-lista">Inicio</li></a>
+        <a href="{% url 'Miembros' %}"><li class="elemento-lista">Miembros</li></a>
         {% if user.is_authenticated %}
             <a href="{% url 'Agregar-Post' %}"><li class="elemento-lista">
         {% else %}

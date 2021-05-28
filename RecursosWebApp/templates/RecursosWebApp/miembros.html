@@ -1,0 +1,81 @@
+{% extends "RecursosWebApp/base.html" %}
+
+{% load static %}
+
+{% block title %} 
+    Miembros
+{% endblock %}
+  
+{% block content %}
+<body>
+
+    <h3 class="subtitulo">Miembros</h3>
+    
+    <div class="contenedor-padre">
+        <div class="contenedor-elementos">
+            {% for miembro in object_list %}
+                {% with usuario=miembro.user %}
+
+                    <div id="carta">
+                        <div class="contenedor-carta">
+                            <img src="{{usuario.perfil.profile_pic.url}}" style="width: 50px; height: auto; border-radius: 50%;">
+                            
+                            {% if usuario.first_name %}
+                                <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
+                            {% else %}
+                                <h3 style="opacity: 0;">None</h3>
+                            {% endif %}
+                            <a href="javascript:void(0);" onclick="showPerfil('{{usuario.pk}}');"><strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong></a>
+                            <p><i>{{usuario.perfil.bio|slice:":20"}}...</i></p>
+                            {% if user.is_authenticated %}
+                                <div class="row" id="redes">
+                                    {% if usuario.email %}
+                                        <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                                    {% endif %}
+                                    {% if usuario.perfil.webpage %}
+                                        <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
+                                    {% endif %}
+                                    {% if usuario.perfil.numero %}
+                                        <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+    {% for miembro in object_list %}
+        {% with usuario=miembro.user %}
+            <div id="{{usuario.pk}}" class="perfiles">
+                <div id="boton-volver-relative">
+                    <a href="javascript:void(0);" onclick="showPerfil('{{usuario.pk}}');"><img src="{% static 'RecursosWebApp/img/arrow-backward.svg'%}"></a>
+                </div>
+                    <div id="contenido-perfil">
+                        <img src="{{usuario.perfil.profile_pic.url}}" style="width: 50px; height: auto; border-radius: 50%;">
+                        <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
+                        <strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong>
+                        <section id="biografia-perfil"><p><i>{{usuario.perfil.bio}}</i></p></section>
+                        <div class="row" id="redes">
+                            {% if usuario.email %}
+                            <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
+                            {% endif %}
+                            {% if usuario.perfil.webpage %}
+                            <a href="{{usuario.perfil.webpage}}"><img src="{% static 'RecursosWebApp/img/web.svg' %}"></a>
+                            {% endif %}
+                            {% if usuario.perfil.numero %}
+                            <a href="https://api.whatsapp.com/send?phone={{usuario.perfil.numero}}"><img src="{% static 'RecursosWebApp/img/whatsapp.svg' %}"></a>
+                            {% endif %}
+                        </div>
+                        <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
+                            <a href="{% url 'editar_info' usuario.perfil.pk %}" style="appearance: button; text-align: right;">Editar perfil</a>
+                        </div>
+                    </div>
+            </div>
+        {% endwith %}
+    {% endfor %}
+
+</body>
+{% endblock %}
+

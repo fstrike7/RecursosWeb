@@ -8,6 +8,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from .forms import EditarPerfilForm, RegistrarseForm, CambiarPassForm
 from RecursosWebApp.forms import PerfilForm
+from django.views.generic import ListView
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = CambiarPassForm
@@ -34,3 +35,4 @@ class EditarInfoUsuarioView(generic.UpdateView):
 
 def password_success(request):
     return render(request, 'registration/pass_success.html', {})
+
