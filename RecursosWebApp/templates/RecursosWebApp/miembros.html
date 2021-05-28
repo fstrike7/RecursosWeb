@@ -70,7 +70,7 @@
                                 {% endif %}
                             </div>
                         
-                            {% if user=usuario %}
+                            {% if user == usuario %}
                                 <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
                                     <a href="{% url 'editar_info' usuario.perfil.pk %}" style="appearance: button; text-align: right;">Editar perfil</a>
                                 </div>
