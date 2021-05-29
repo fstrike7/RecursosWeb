@@ -48,7 +48,7 @@
                         <img src="{{usuario.perfil.profile_pic.url}}" style="width: 50px; height: auto; border-radius: 50%;">
                         <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
                         <strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong>
-                        <section id="biografia-perfil"><p><i>{{usuario.perfil.bio}}</i></p></section>
+                        <section id="biografia-perfil"><i><p style="word-break: break-all;">{{usuario.perfil.bio}}</p></i></section>
                         {% if user.is_authenticated %}
                             <div class="row" id="redes">
                                 {% if usuario.email %}
@@ -62,9 +62,6 @@
                                 {% endif %}
                             </div>
                         {% endif %}
-                        <!-- <div id="Editar-boton" style="margin-top: 3%; text-align: right;">
-                            <a href="{% url 'editar' %}" style="appearance: button; text-align: right;">Editar perfil</a>
-                        </div> -->
                     </div>
                 {% endwith %}
         </div>
@@ -79,7 +76,7 @@
                             <img src="{{usuario.perfil.profile_pic.url}}" style="width: 50px; height: auto; border-radius: 50%;">
                             <h3>{{usuario.first_name}} {{usuario.last_name}}</h3>
                             <strong style="opacity: 0.8;"><p>@{{usuario.username}}</p></strong>
-                            <section id="biografia-perfil"><p><i>{{usuario.perfil.bio}}</i></p></section>
+                            <section id="biografia-perfil"><i><p style="word-break: break-all;">{{usuario.perfil.bio}}</p></i></section>
                             <div class="row" id="redes">
                                 {% if usuario.email %}
                                 <a href="mailto:{{usuario.email}}"><img src="{% static 'RecursosWebApp/img/mail.svg' %}"></a>
